@@ -1,6 +1,6 @@
 <!--
 *** To avoid retyping too much info. Do a search and replace for the following:
-*** adminph-de, tf-fls-template, N00ky2010, patrick.hayo@flsmidth.com
+*** adminph-de, tf-fls-aks-cluster, N00ky2010, patrick.hayo@flsmidth.com
 -->
 
 [![Contributors][contributors-shield]][contributors-url]
@@ -12,7 +12,7 @@
 
 <!-- PROJECT LOGO AND NAME-->
 <p align="left">
-  <a href="https://github.com/adminph-de/tf-fls-template">
+  <a href="https://github.com/adminph-de/tf-fls-aks-cluster">
     <img src="images/tfaz-logo.png" alt="Azure and Terraform" width="70%" height="70%">
   </a>
   <br />
@@ -24,8 +24,6 @@
 
 This repo is for use to deploy inforastructure objectes into the following Subscriptions:
 
-- GBS Preprod
-- GBS Testing
 - GBS Prodution
 
 Tentant: **flsmidth.onmicrosoft.com**
@@ -47,7 +45,7 @@ Tentant: **flsmidth.onmicrosoft.com**
 <!-- ABOUT THE PROJECT  -->
 ## About
 
->Short Description of the Project.
+Create a Kubernetes cluster with Azure Kubernetes Service using Terraform
 
 
 <!-- PREREQUISITES  -->
@@ -59,13 +57,14 @@ Tentant: **flsmidth.onmicrosoft.com**
 <!-- INSTALLATION  -->
 ### Installation
 
->All necessary installations beside the Terraform code.
+* [Create a Kubernetes cluster with Azure Kubernetes Service using Terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks#set-up-azure-storage-to-store-terraform-state)
+* [Create the Kubernetes cluster](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks#create-the-kubernetes-cluster)
 
 
 <!-- USAGE  -->
 ### Usage
 
->How to use the code to deploy the objects.
+* [Test the Kubernetes cluster](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks#test-the-kubernetes-cluster)
 
 
 <!-- CONTRIBUTING  -->
@@ -86,7 +85,7 @@ Any contributions you make are **greatly appreciated**.
 
 [LinkedIN](https://www.linkedin.com/in/patrickhayo/?locale=en_US) - [Twitter](https://twitter.com/N00ky2010) - [Email](patrick.hayo@flsmidth.com)
 
-Project Link: [https://github.com/adminph-de/tf-fls-template](https://github.com/adminph-de/tf-fls-template)
+Project Link: [https://github.com/adminph-de/tf-fls-aks-cluster](https://github.com/adminph-de/tf-fls-aks-cluster)
 
 
 <!-- ACKNOWLAGEMENTS -->
@@ -101,22 +100,22 @@ Project Link: [https://github.com/adminph-de/tf-fls-template](https://github.com
 <!-- REFERENZES -->
 ## Referenzes
 
->All referenzes you used in the project, internal and external.
+* [Create a Kubernetes cluster with Azure Kubernetes Service using Terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[bug-report]: https://github.com/adminph-de/tf-fls-template/issues
-[Request Feature]:https://github.com/adminph-de/tf-fls-template/issues
-[contributors-shield]: https://img.shields.io/github/contributors/adminph-de/tf-fls-template.svg?style=flat-square
-[contributors-url]: https://github.com/adminph-de/tf-fls-template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/adminph-de/tf-fls-template.svg?style=flat-square
-[forks-url]: https://github.com/adminph-de/tf-fls-template/network/members
-[stars-shield]: https://img.shields.io/github/stars/adminph-de/tf-fls-template?style=flat-square
-[stars-url]: https://github.com/adminph-de/tf-fls-template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/adminph-de/tf-fls-template.svg?style=flat-square
-[issues-url]: https://github.com/adminph-de/tf-fls-template/issues
-[license-shield]: https://img.shields.io/github/license/adminph-de/tf-fls-template.svg?style=flat-square
-[license-url]: https://github.com/adminph-de/tf-fls-template/blob/master/LICENSE
+[bug-report]: https://github.com/adminph-de/tf-fls-aks-cluster/issues
+[Request Feature]:https://github.com/adminph-de/tf-fls-aks-cluster/issues
+[contributors-shield]: https://img.shields.io/github/contributors/adminph-de/tf-fls-aks-cluster.svg?style=flat-square
+[contributors-url]: https://github.com/adminph-de/tf-fls-aks-cluster/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/adminph-de/tf-fls-aks-cluster.svg?style=flat-square
+[forks-url]: https://github.com/adminph-de/tf-fls-aks-cluster/network/members
+[stars-shield]: https://img.shields.io/github/stars/adminph-de/tf-fls-aks-cluster?style=flat-square
+[stars-url]: https://github.com/adminph-de/tf-fls-aks-cluster/stargazers
+[issues-shield]: https://img.shields.io/github/issues/adminph-de/tf-fls-aks-cluster.svg?style=flat-square
+[issues-url]: https://github.com/adminph-de/tf-fls-aks-cluster/issues
+[license-shield]: https://img.shields.io/github/license/adminph-de/tf-fls-aks-cluster.svg?style=flat-square
+[license-url]: https://github.com/adminph-de/tf-fls-aks-cluster/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/patrickhayo/?locale=en_US
