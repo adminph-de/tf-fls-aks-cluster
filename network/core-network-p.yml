@@ -1,0 +1,57 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Backend Storage Account'
+  inputs:
+    azureSubscription: 'GbsProduction'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group create --location $(TerraformBackend.Location) --name $(TerraformBackend.ResourceGroup)
+      az storage account create --name $(TerraformBackend.StorageAccount) --resource-group $(TerraformBackend.ResourceGroup) --location $(TerraformBackend.Location) --sku Standard_LRS
+      az storage container create --name $(TerraformBackend.ContainerName) --account-name $(TerraformBackend.StorageAccount)
+      az lock create --name lockName --resource-group $(TerraformBackend.ResourceGroup) --lock-type CanNotDelete
+      az lock create --name lockName --resource-group $(TerraformBackend.ResourceGroup) --lock-type CanNotDelete --resource-type 'Microsoft.Storage/storageAccounts' --resource $(TerraformBackend.StorageAccount)
+      STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(TerraformBackend.ResourceGroup) -n $(TerraformBackend.StorageAccount) | jq ".[0].value" -r)
+      echo "setting storage account key variable" echo "##vso[task.setvariable variable=ARM_ACCESS_KEY;issecret=true]$STORAGE_ACCOUNT_KEY" 
+- task: TerraformInstaller@0
+  displayName: 'Install Terraform v0.12.29'
+  inputs:
+    terraformVersion: '0.12.29'
+- task: TerraformTaskV1@0
+  displayName: "Terraform Init"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/production/australiaeast/core-network'
+    backendServiceArm: 'GbsProduction'
+    backendAzureRmResourceGroupName: '$(TerraformBackend.ResourceGroup)'
+    backendAzureRmStorageAccountName: '$(TerraformBackend.StorageAccount)'
+    backendAzureRmContainerName: '$(TerraformBackend.ContainerName)'
+    backendAzureRmKey: '$(BackendAzureRmKey.Env).terraform.tfstate'
+- task: TerraformTaskV1@0
+  displayName: 'Terraform Plan'
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    commandOptions: '-out=tfplan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/production/australiaeast/core-network'
+    environmentServiceNameAzureRM: 'GbsProduction'
+- task: TerraformTaskV1@0
+  displayName: 'Terraform Apply'
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/production/australiaeast/core-network'
+    environmentServiceNameAzureRM: 'GbsProduction'
