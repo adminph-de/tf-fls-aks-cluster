@@ -14,7 +14,7 @@ steps:
 - task: AzureCLI@2
   displayName: 'Backend Storage Account'
   inputs:
-    azureSubscription: 'GbsProduction'
+    azureSubscription: 'k8sProduction'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -35,7 +35,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/production/australiaeast/core-network'
-    backendServiceArm: 'GbsProduction'
+    backendServiceArm: 'k8sProduction'
     backendAzureRmResourceGroupName: '$(TerraformBackend.ResourceGroup)'
     backendAzureRmStorageAccountName: '$(TerraformBackend.StorageAccount)'
     backendAzureRmContainerName: '$(TerraformBackend.ContainerName)'
@@ -47,11 +47,11 @@ steps:
     command: 'plan'
     commandOptions: '-out=tfplan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/production/australiaeast/core-network'
-    environmentServiceNameAzureRM: 'GbsProduction'
+    environmentServiceNameAzureRM: 'k8sProduction'
 - task: TerraformTaskV1@0
   displayName: 'Terraform Apply'
   inputs:
     provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/production/australiaeast/core-network'
-    environmentServiceNameAzureRM: 'GbsProduction'
+    environmentServiceNameAzureRM: 'k8sProduction'
