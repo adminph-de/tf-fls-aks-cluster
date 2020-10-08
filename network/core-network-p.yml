@@ -9,6 +9,18 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+- group: tf-backend-vault
+- name: BackendAzureRmKey.Env
+  value: 'production'
+- name: TerraformBackend.ContainerName
+  value: 'tfstate-core-network'
+- name: TerraformBackend.Location
+  value: 'westeurope'
+- name: TerraformBackend.ResourceGroup
+  value: 'terraform-backend-storage'
+- name: TerraformBackend.StorageAccount
+  value: 'tfstate2020073422018' 
 
 steps:
 - task: AzureCLI@2
