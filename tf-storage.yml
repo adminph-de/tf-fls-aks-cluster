@@ -10,17 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: tf-backend-vault
-- name: Env
-  value: 'production'
-- name: ContainerName
-  value: 'network'
-- name: Location
-  value: 'westeurope'
-- name: ResourceGroup
-  value: 'terraform-stage-storage-${{variables.Location}}'
-- name: StorageAccount
-  value: 'tfstate20201008' 
+- group: tf-backend-storage
 
 steps:
 - task: AzureCLI@2
@@ -32,7 +22,6 @@ steps:
     inlineScript: |
       az group create --location $(Location) --name $(ResourceGroup)
       az storage account create --name $(StorageAccount) --resource-group $(ResourceGroup) --location $(Location) --sku Standard_LRS
-      az storage container create --name $(ContainerName) --account-name $(StorageAccount)
       az lock create --name lockName --resource-group $(ResourceGroup) --lock-type CanNotDelete
       az lock create --name lockName --resource-group $(ResourceGroup) --lock-type CanNotDelete --resource-type 'Microsoft.Storage/storageAccounts' --resource $(StorageAccount)
       STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(ResourceGroup) -n $(StorageAccount) | jq ".[0].value" -r)
