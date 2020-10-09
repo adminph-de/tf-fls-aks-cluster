@@ -30,12 +30,12 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az group create --location $(TerraformBackend.Location) --name $(TerraformBackend.ResourceGroup)
-      az storage account create --name $(TerraformBackend.StorageAccount) --resource-group $(TerraformBackend.ResourceGroup) --location $(TerraformBackend.Location) --sku Standard_LRS
-      az storage container create --name $(TerraformBackend.ContainerName) --account-name $(TerraformBackend.StorageAccount)
-      az lock create --name lockName --resource-group $(TerraformBackend.ResourceGroup) --lock-type CanNotDelete
-      az lock create --name lockName --resource-group $(TerraformBackend.ResourceGroup) --lock-type CanNotDelete --resource-type 'Microsoft.Storage/storageAccounts' --resource $(TerraformBackend.StorageAccount)
-      STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(TerraformBackend.ResourceGroup) -n $(TerraformBackend.StorageAccount) | jq ".[0].value" -r)
+      az group create --location $(Location) --name $(ResourceGroup)
+      az storage account create --name $(StorageAccount) --resource-group $(ResourceGroup) --location $(Location) --sku Standard_LRS
+      az storage container create --name $(ContainerName) --account-name $(StorageAccount)
+      az lock create --name lockName --resource-group $(ResourceGroup) --lock-type CanNotDelete
+      az lock create --name lockName --resource-group $(ResourceGroup) --lock-type CanNotDelete --resource-type 'Microsoft.Storage/storageAccounts' --resource $(StorageAccount)
+      STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(ResourceGroup) -n $(StorageAccount) | jq ".[0].value" -r)
       echo "setting storage account key variable" echo "##vso[task.setvariable variable=ARM_ACCESS_KEY;issecret=true]$STORAGE_ACCOUNT_KEY" 
 - task: TerraformInstaller@0
   displayName: 'Install Terraform v0.12.29'
@@ -48,9 +48,9 @@ steps:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/network'
     backendServiceArm: 'k8sProduction'
-    backendAzureRmResourceGroupName: '$(TerraformBackend.ResourceGroup)'
-    backendAzureRmStorageAccountName: '$(TerraformBackend.StorageAccount)'
-    backendAzureRmContainerName: '$(TerraformBackend.ContainerName)'
+    backendAzureRmResourceGroupName: '$(ResourceGroup)'
+    backendAzureRmStorageAccountName: '$(StorageAccount)'
+    backendAzureRmContainerName: '$(ContainerName)'
     backendAzureRmKey: '$(BackendAzureRmKey.Env).terraform.tfstate'
 - task: TerraformTaskV1@0
   displayName: 'Terraform Plan'
