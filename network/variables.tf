@@ -13,7 +13,7 @@ variable "vnet-name" {
 }
 variable "vnet-address-space" {
   description = "VNet Address Space"
-  default     = "10.3.38.0/22"
+  default     = "10.3.36.0/22"
 }
 variable "vnet-dns-servers" {
   description = "Customized DNS Servers of the VNet"
