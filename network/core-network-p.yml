@@ -20,7 +20,7 @@ variables:
 - name: ResourceGroup
   value: 'terraform-stage-storage-${{ variables.Location }}'
 - name: StorageAccount
-  value: 'tfstate2020073422018' 
+  value: 'tfstate20201008' 
 
 steps:
 - task: AzureCLI@2
