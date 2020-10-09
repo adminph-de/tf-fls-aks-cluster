@@ -38,9 +38,9 @@ steps:
       STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(ResourceGroup) -n $(StorageAccount) | jq ".[0].value" -r)
       echo "setting storage account key variable" echo "##vso[task.setvariable variable=ARM_ACCESS_KEY;issecret=true]$STORAGE_ACCOUNT_KEY" 
 - task: TerraformInstaller@0
-  displayName: 'Install Terraform v0.12.29'
+  displayName: 'Install Terraform v0.13.4'
   inputs:
-    terraformVersion: '0.12.29'
+    terraformVersion: '0.13.4'
 - task: TerraformTaskV1@0
   displayName: "Terraform Init"
   inputs:
