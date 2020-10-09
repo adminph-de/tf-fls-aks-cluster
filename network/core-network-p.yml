@@ -11,15 +11,15 @@ pool:
 
 variables:
 - group: tf-backend-vault
-- name: BackendAzureRmKey.Env
+- name: Env
   value: 'production'
-- name: TerraformBackend.ContainerName
-  value: 'tfstate-core-network'
-- name: TerraformBackend.Location
+- name: ContainerName
+  value: 'network'
+- name: Location
   value: 'westeurope'
-- name: TerraformBackend.ResourceGroup
-  value: 'terraform-backend-storage'
-- name: TerraformBackend.StorageAccount
+- name: ResourceGroup
+  value: 'terraform-stage-storage-${{ variables.Location }}'
+- name: StorageAccount
   value: 'tfstate2020073422018' 
 
 steps:
