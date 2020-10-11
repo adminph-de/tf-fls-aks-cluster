@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: tf-backend-storage
+- group: tf-state-backend
 - name: ResourceGroup
   value: '$(RgNamePrefix)$(Location)'
 - name: ContainerName
