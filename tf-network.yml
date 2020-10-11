@@ -10,7 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: tf-backend-vault
+- group: tf-backend-storage
+- name: ResourceGroup
+  value: '$(RgNamePrefix)$(Location)'
 - name: ContainerName
   value: 'network'
 
