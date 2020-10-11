@@ -12,7 +12,7 @@ pool:
 variables:
 - group: tf-backend-storage
 - name: ResourceGroup
-  value: '$(RgNamePrefix)-$(Location)'
+  value: '$(RgNamePrefix)$(Location)'
 
 steps:
 - task: AzureCLI@2
