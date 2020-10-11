@@ -41,7 +41,7 @@ steps:
     backendAzureRmResourceGroupName: '$(ResourceGroup)'
     backendAzureRmStorageAccountName: '$(StorageAccountName)'
     backendAzureRmContainerName: '$(ContainerName)'
-    backendAzureRmKey: '$(Env).terraform.tfstate'
+    backendAzureRmKey: 'terraform.tfstate'
 - task: TerraformTaskV1@0
   displayName: 'Terraform Plan'
   inputs:
