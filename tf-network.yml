@@ -24,8 +24,8 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az storage container create --name $(ContainerName) --account-name $(StorageAccount)
       STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(ResourceGroup) -n $(StorageAccount) | jq ".[0].value" -r)
+      az storage container create --name $(ContainerName) --account-name $(StorageAccount) --resource-group $(ResourceGroup) --account-key $STORAGE_ACCOUNT_KEY
       echo "setting storage account key variable" echo "##vso[task.setvariable variable=ARM_ACCESS_KEY;issecret=true]$STORAGE_ACCOUNT_KEY" 
 - task: TerraformInstaller@0
   displayName: 'Install Terraform v0.13.4'
