@@ -1,6 +1,6 @@
 #Create NSG for default Subnet
 resource "azurerm_network_security_group" "default-nsg" {
-  name                = "default-nsg"
+  name                = "default-p-nsg"
   location            = azurerm_resource_group.vnet-rg.location
   resource_group_name = azurerm_resource_group.vnet-rg.name
 
