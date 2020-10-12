@@ -19,6 +19,11 @@ variable "vnet-dns-servers" {
   description = "Customized DNS Servers of the VNet"
   default     = ["10.31.0.132","10.31.0.192", "8.8.8.8"]
 }
+variable "vnet-default-nsg" {
+  description = "Default Network Security Group"
+  default     = "default-p-nsg"
+}
+
 #Default Subnet definition
 variable "default-name" {    
   description = "Default Network Name for VMs etc."    

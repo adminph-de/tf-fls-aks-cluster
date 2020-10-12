@@ -30,6 +30,11 @@ resource "azurerm_subnet" "subnet-default" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = var.default-subnet
 }
+#Accosiate NSG with Default Subnet
+resource "azurerm_subnet_network_security_group_association" "default-sub-nsg" {
+  subnet_id                 = azurerm_subnet.subnet-default.id
+  network_security_group_id = azurerm_network_security_group.default-nsg.id
+}
 
 ##### ADDED SUBNET ######
 ##### CHECK: variables.tf and local variables BEFORE YOU ADD NEW SUBNETS ######
@@ -39,4 +44,9 @@ resource "azurerm_subnet" "subnet-default" {
 #  resource_group_name  = azurerm_resource_group.example.name
 #  virtual_network_name = azurerm_virtual_network.example.name
 #  address_prefix       = local.subnet-example-1-address-prefix
+#}
+#Accosiate NSG with Bastion Subnet
+#resource "azurerm_subnet_network_security_group_association" "subnet-example-1-sub-nsg" {
+#  subnet_id                 = azurerm_subnet.subnet-example-1.id
+#  network_security_group_id = azurerm_network_security_group.default-nsg.id
 #}
