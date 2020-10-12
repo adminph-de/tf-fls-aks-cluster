@@ -21,7 +21,7 @@ variable "vnet-dns-servers" {
 }
 variable "vnet-default-nsg" {
   description = "Default Network Security Group"
-  default     = ""k8s-default-p-nsg"
+  default     = "k8s-default-p-nsg"
 }
 
 #Default Subnet definition
