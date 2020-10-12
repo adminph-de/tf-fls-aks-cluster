@@ -21,7 +21,7 @@ resource "azurerm_network_security_group" "default-nsg" {
     direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "*"
-    source_port_ranges         = "VirtualNetwork"
+    source_port_range          = "*"
     destination_port_range     = "*"
     source_address_prefix      = "*"
     destination_address_prefix = "Internet"
