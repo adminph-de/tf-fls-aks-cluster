@@ -15,7 +15,6 @@ resource "azurerm_network_security_group" "default-nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
   security_rule {
     name                       = "k8s-nodes-out-allow"
     priority                   = 850
