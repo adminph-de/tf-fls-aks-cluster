@@ -6,7 +6,7 @@ locals {
   # subnet-example-1-address-prefix = "10.3.36.64/26"
   # subnet-example-1-name           = "shared__192_168_160_32__27"
 }
-}
+
 #Create VNet
 resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet-name
