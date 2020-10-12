@@ -88,7 +88,7 @@ resource "azurerm_network_security_group" "bastion-nsg" {
 }
 
 #Accosiate NSG with Bastion Subnet
-resource "azurerm_subnet_network_security_group_association" "bastion-nsg" {
+resource "azurerm_subnet_network_security_group_association" "bastion-sub-nsg" {
   subnet_id                 = azurerm_subnet.subnet-bastion.id
   network_security_group_id = azurerm_network_security_group.bastion-nsg.id
 }

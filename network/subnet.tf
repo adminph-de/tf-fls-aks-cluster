@@ -1,6 +1,11 @@
 locals {
   bastion-name    = "AzureBastionSubnet"
   firwall-name    = "AzureFirewallSubnet"
+
+  ##Adding a new Subnet variable(s) definition
+  # subnet-example-1-address-prefix = "10.3.36.64/26"
+  # subnet-example-1-name           = "shared__192_168_160_32__27"
+}
 }
 #Create VNet
 resource "azurerm_virtual_network" "vnet" {
@@ -27,11 +32,11 @@ resource "azurerm_subnet" "subnet-default" {
 }
 
 ##### ADDED SUBNET ######
-##### CHECK: variables.tf BEFORE YOU ADD NEW SUBNETS ######
+##### CHECK: variables.tf and local variables BEFORE YOU ADD NEW SUBNETS ######
 
 #resource "azurerm_subnet" "subnet-example-1" {
-#  name                 = "shared__192_168_160_32__27"
+#  name                 = local.subnet-example-1-name
 #  resource_group_name  = azurerm_resource_group.example.name
 #  virtual_network_name = azurerm_virtual_network.example.name
-#  address_prefix       = "192.168.160.32/27"
+#  address_prefix       = local.subnet-example-1-address-prefix
 #}
