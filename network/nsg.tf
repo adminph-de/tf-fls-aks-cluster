@@ -64,9 +64,3 @@ resource "azurerm_network_security_group" "default-nsg" {
     destination_address_prefix = "AzureCloud"
   }
 }
-
-#Accosiate NSG with default Subnet
-resource "azurerm_subnet_network_security_group_association" "default-sub-nsg" {
-  subnet_id                 = azurerm_subnet.default-subnet.id
-  network_security_group_id = azurerm_network_security_group.default-nsg.id
-}
