@@ -1,32 +1,8 @@
 #Create NSG for default Subnet
 resource "azurerm_network_security_group" "default-nsg" {
-  name                = "${var.vnet-default-nsg}-pip"
+  name                = "${var.vnet-default-nsg}"
   location            = azurerm_resource_group.vnet-rg.location
   resource_group_name = azurerm_resource_group.vnet-rg.name
-
-  security_rule {
-    name                       = "bastion-in-allow"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "443"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "bastion-control-in-allow"
-    priority                   = 120
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_ranges    = ["443", "4443"]
-    source_address_prefix      = "GatewayManager"
-    destination_address_prefix = "*"
-  }
 
   security_rule {
     name                       = "bastion-in-deny"
@@ -41,26 +17,26 @@ resource "azurerm_network_security_group" "default-nsg" {
   }
 
   security_rule {
-    name                       = "bastion-vnet-out-allow"
-    priority                   = 100
+    name                       = "k8s-nodes-out-allow"
+    priority                   = 850
     direction                  = "Outbound"
     access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_ranges         = ["22", "3389"]
+    protocol                   = "*"
+    source_port_ranges         = "*"
     destination_port_range     = "*"
     source_address_prefix      = "*"
-    destination_address_prefix = "VirtualNetwork"
+    destination_address_prefix = "Internet"
+  }
+  security_rule {
+    name                       = "k8s-nodes-out-deny"
+    priority                   = 900
+    direction                  = "Outbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_ranges         = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
   }
 
-  security_rule {
-    name                       = "bastion-azure-out-allow"
-    priority                   = 120
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "443"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "AzureCloud"
-  }
 }
