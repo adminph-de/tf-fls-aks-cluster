@@ -8,6 +8,18 @@ resource "azurerm_resource_group" "aks" {
     Description = "Deployed by Terraform (IaC)"
   }
 }
+## Create Container Registry
+resource "azurerm_container_registry" "acr" {
+  name                     = "sharedacr1p"
+  resource_group_name      = azurerm_resource_group.aks.name
+  location                 = azurerm_resource_group.aks.location
+  sku                      = "Standard"
+  admin_enabled            = false
+  tags = {
+    Enviornment = "PROD"
+    Description = "Deployed by Terraform (IaC)"
+  }
+}
 ## Create the virtual network for an AKS cluster
 module "network" {
   source              = "git@github.com:adminph-de/tf-fls-aks-cluster.git//build//modules//virtual_network?ref=deploy-1.0"
@@ -32,7 +44,7 @@ module "cluster" {
   network_plugin      = "azure"
   network_policy      = "calico"
   public_ssh_key_path = "aks-key.pub"
-  #log_analytics_workspace_id = "5cf8763f-c4b5-45bb-9ba1-013cb034a609"
+  log_analytics_workspace_id = "/subscriptions/8e532136-bdd7-4140-84e2-b7943baf6411/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-8e532136-bdd7-4140-84e2-b7943baf6411-WEU" 
 }
 ## Create the node pool
 module "node_pool" {
@@ -41,13 +53,4 @@ module "node_pool" {
   kubernetes_version  = "1.17.11"
   aks_cluster_id = module.cluster.id
   node_subnet_id = module.network.subnet_ids[0]
-}
-
-## Create Container Registry
-resource "azurerm_container_registry" "acr" {
-  name                     = "sharedacr1p"
-  resource_group_name      = azurerm_resource_group.aks.name
-  location                 = azurerm_resource_group.aks.location
-  sku                      = "Standard"
-  admin_enabled            = false
 }
