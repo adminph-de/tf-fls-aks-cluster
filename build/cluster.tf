@@ -17,7 +17,7 @@ module "network" {
   network_cidr_prefix = "10.3.36.0"
   network_cidr_suffix = 22
   subnets = [{
-    name       = "aks-shared-1-p"
+    name       = "aks-default-1-p"
     cidr_block = 23
   }]
 }
