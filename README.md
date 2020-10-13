@@ -24,7 +24,7 @@
 
 This repo is for use to deploy inforastructure objectes into the following Subscriptions:
 
-- GBS Prodution
+- Group Digital Kubernetes (8e532136-bdd7-4140-84e2-b7943baf6411)
 
 Tentant: **flsmidth.onmicrosoft.com**
 
