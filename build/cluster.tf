@@ -32,7 +32,7 @@ module "cluster" {
   network_plugin      = "azure"
   network_policy      = "calico"
   public_ssh_key_path = "aks-key.pub"
-  log_analytics_workspace_id = "5cf8763f-c4b5-45bb-9ba1-013cb034a609"
+  #log_analytics_workspace_id = "5cf8763f-c4b5-45bb-9ba1-013cb034a609"
 }
 ## Create the node pool
 module "node_pool" {
