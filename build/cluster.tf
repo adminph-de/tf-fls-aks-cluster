@@ -15,7 +15,7 @@ module "network" {
   resource_group_name = azurerm_resource_group.aks.name
   name                = "aks-shared-vnet-1-p"
   network_cidr_prefix = "10.3.36.0"
-  network_cidr_suffix = 20
+  network_cidr_suffix = 22
   subnets = [
     {
     name       = "AzureBastionSubnet"
