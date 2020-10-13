@@ -50,5 +50,4 @@ resource "azurerm_container_registry" "acr" {
   location                 = azurerm_resource_group.aks.location
   sku                      = "Standard"
   admin_enabled            = false
-  georeplication_locations = ["West Europe"]
 }
