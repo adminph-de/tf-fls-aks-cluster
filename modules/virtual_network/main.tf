@@ -9,7 +9,7 @@ locals {
 }
 
 module "subnet_addrs" {
-  source          = "git@github.com:adminph-de/tf-fls-aks-cluster.git//build//modules//cidr_subnets?ref=deploy-1.0"
+  source          = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//cidr_subnets?ref=cluster-1.0"
   base_cidr_block = local.network_cidr
   networks        = local.network_objs
 }
