@@ -42,3 +42,13 @@ module "node_pool" {
   aks_cluster_id = module.cluster.id
   node_subnet_id = module.network.subnet_ids[0]
 }
+
+## Create Container Registry
+resource "azurerm_container_registry" "acr" {
+  name                     = "sharedacr1p"
+  resource_group_name      = azurerm_resource_group.aks.name
+  location                 = azurerm_resource_group.aks.location
+  sku                      = "Standard"
+  admin_enabled            = false
+  georeplication_locations = ["West Europe"]
+}
