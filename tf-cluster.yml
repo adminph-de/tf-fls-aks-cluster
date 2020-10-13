@@ -1,0 +1,59 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- group: tf-backend-storage
+- name: ResourceGroup
+  value: '$(RgNamePrefix)$(Location)'
+- name: ContainerName
+  value: 'cluster'
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Backend Storage Account'
+  inputs:
+    azureSubscription: 'k8sProduction'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      STORAGE_ACCOUNT_KEY=$(az storage account keys list -g $(ResourceGroup) -n $(StorageAccountName) | jq ".[0].value" -r)
+      az storage container create --name $(ContainerName) --account-name $(StorageAccountName) --resource-group $(ResourceGroup) --account-key $STORAGE_ACCOUNT_KEY --fail-on-exist
+      echo "setting storage account key variable" echo "##vso[task.setvariable variable=ARM_ACCESS_KEY;issecret=true]$STORAGE_ACCOUNT_KEY" 
+- task: TerraformInstaller@0
+  displayName: 'Install Terraform v0.13.4'
+  inputs:
+    terraformVersion: '0.13.4'
+- task: TerraformTaskV1@0
+  displayName: "Terraform Init"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/build'
+    backendServiceArm: 'k8sProduction'
+    backendAzureRmResourceGroupName: '$(ResourceGroup)'
+    backendAzureRmStorageAccountName: '$(StorageAccountName)'
+    backendAzureRmContainerName: '$(ContainerName)'
+    backendAzureRmKey: '$(env).terraform.tfstate'
+- task: TerraformTaskV1@0
+  displayName: 'Terraform Plan'
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    commandOptions: '-out=tfplan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/build'
+    environmentServiceNameAzureRM: 'k8sProduction'
+- task: TerraformTaskV1@0
+  displayName: 'Terraform Apply'
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/build'
+    environmentServiceNameAzureRM: 'k8sProduction'

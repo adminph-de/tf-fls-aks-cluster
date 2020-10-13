@@ -2,6 +2,11 @@
 resource "azurerm_resource_group" "aks" {
   name     = "aks-shared-p"
   location = "westeurope"
+  tags = {
+    Department  = "Cloud Center of Exelence (CCoE)"
+    Enviornment = "PROD"
+    Description = "Deployed by Terraform (IaC)"
+  }
 }
 ## Create the virtual network for an AKS cluster
 module "network" {
