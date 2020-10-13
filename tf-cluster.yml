@@ -10,7 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: id_rsa.pub
 - group: tf-backend-storage
 - name: ResourceGroup
   value: '$(RgNamePrefix)$(Location)'
