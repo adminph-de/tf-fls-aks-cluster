@@ -46,7 +46,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/scripts/sql'
     backendServiceArm: 'k8sProduction'
     backendAzureRmResourceGroupName: '$(ResourceGroup)'
-    backendAzureRmStorageAccountName: '$(StorageAccountName)/scripts/sql'
+    backendAzureRmStorageAccountName: '$(StorageAccountName)'
     backendAzureRmContainerName: '$(ContainerName)'
     backendAzureRmKey: '$(env).terraform.tfstate'
 - task: TerraformTaskV1@0
