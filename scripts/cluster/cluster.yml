@@ -43,7 +43,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/scripts/cluster'
     backendServiceArm: 'k8sProduction'
     backendAzureRmResourceGroupName: '$(ResourceGroup)'
     backendAzureRmStorageAccountName: '$(StorageAccountName)'
@@ -55,12 +55,12 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     commandOptions: '-out=tfplan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/scripts/cluster'
     environmentServiceNameAzureRM: 'k8sProduction'
 - task: TerraformTaskV1@0
   displayName: 'Terraform Apply'
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/scripts/cluster'
     environmentServiceNameAzureRM: 'k8sProduction'
