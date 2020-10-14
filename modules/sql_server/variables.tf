@@ -14,11 +14,11 @@ variable "region" {
   description = "Azuer region"
 }
 
-variable "verion" {
-  type        = string
-  description = "SQL Server version"
-  default     = "12.0"
-}
+#variable "verion" {
+#  type        = string
+#  description = "SQL Server version"
+#  default     = "12.0"
+#}
 
 variable "admin_login" {
   type        = string
