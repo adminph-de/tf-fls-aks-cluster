@@ -25,10 +25,6 @@ resource "azurerm_virtual_network" "network" {
     content {
       name           = subnet.key
       address_prefix = subnet.value
-    for_each = var.enable_service_endpoints == true ? [] : []
-    content {
-      service_endpoints = var.service_endpoints_id
-    }
   }
     }
   }
