@@ -31,6 +31,8 @@ module "network" {
   subnets = [{
     name       = "aks-default-1-p"
     cidr_block = 23
+    enable_service_endpoints = true
+    sservice_endpoints       = ["Microsoft.Sql"]
   }]
 }
 ## Create the AKS cluster

@@ -52,3 +52,13 @@ variable "ddos_protection_plan_id" {
   default = null
   type = string
 }
+
+variable "enable_service_endpoints" {
+  default = false
+  type = bool
+}
+
+variable "service_endpoints_id" {
+  default = null
+  type = string
+}

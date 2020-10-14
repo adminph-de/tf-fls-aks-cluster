@@ -34,6 +34,13 @@ resource "azurerm_virtual_network" "network" {
       enable = var.enable_ddos_protection_plan
       id = var.ddos_protection_plan_id
     }
+
+    dynamic "service_endpoints" {
+    for_each = var.service_endpoints ? [1] : []
+    content {
+      enable = var.enable_service_endpoints
+      id = var.service_endpoints_id
+    }
   }
 
   tags = merge(var.additional_tags, {
