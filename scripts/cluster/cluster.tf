@@ -22,7 +22,7 @@ resource "azurerm_container_registry" "acr" {
 }
 ## Create the virtual network for an AKS cluster
 module "network" {
-  source              = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//virtual_network?ref=cluster-1.0"
+  source              = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//virtual_network?ref=cluster-v1.0"
   region              = "westeurope"
   resource_group_name = azurerm_resource_group.aks.name
   name                = "aks-shared-vnet-1-p"
@@ -35,7 +35,7 @@ module "network" {
 }
 ## Create the AKS cluster
 module "cluster" {
-  source              = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//aks_cluster?ref=cluster-1.0"
+  source              = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//aks_cluster?ref=cluster-v1.0"
   region              = "westeurope"
   cluster_name        = "aks-shared-1-p"
   kubernetes_version  = "1.17.11"
@@ -48,19 +48,9 @@ module "cluster" {
 }
 ## Create the node pool
 module "node_pool" {
-  source         = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//aks_node_pool?ref=cluster-1.0"
+  source         = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//aks_node_pool?ref=cluster-v1.0"
   name           = "linuxakspool"
   kubernetes_version  = "1.17.11"
   aks_cluster_id = module.cluster.id
   node_subnet_id = module.network.subnet_ids[0]
-}
-## Create SQL Server (Paas)
-module "sql_server" {
-  source          = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//sql_server?ref=cluster-1.0"
-  name            = "shared-sql01-p"
-  resource_group_name  = azurerm_resource_group.aks.name
-  region          = "westeurope"
-  version         = "12.0"
-  admin_login     = "flsadmin"
-  admin__password = "sql!Flsmidth,2020"
 }
