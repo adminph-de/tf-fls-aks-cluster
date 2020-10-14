@@ -25,7 +25,6 @@ resource "azurerm_virtual_network" "network" {
     content {
       name           = subnet.key
       address_prefix = subnet.value
-  }
     }
   }
   dynamic "ddos_protection_plan" {
