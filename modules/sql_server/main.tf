@@ -1,4 +1,4 @@
-resource "azurerm_sql_server" "sql_server" {
+resource "azurerm_sql_server" "sql" {
   lifecycle {
     ignore_changes = [
       node_taints,

@@ -1,3 +1,6 @@
-output "sql_server_name" {
-  value = azurerm_sql_server.sql_server.name
+output "url" {
+  value = azurerm_sql_server.sql.url
+}
+output "id" {
+  value = azurerm_sql_server.sql.id
 }
