@@ -13,7 +13,7 @@ variable "region" {
   description = "Azuer region"
 }
 
-variable "version" {
+variable "sku" {
   type        = string
   description = "SQL Server version"
   default     = "12.0"

@@ -14,7 +14,7 @@ module "sql" {
   name            = "shared-sql01-p"
   resource_group_name = azurerm_resource_group.sql.name
   region          = "westeurope"
-  version         = "12.0"
+  sku             = "12.0"
   url             = "${module.sql.name}.database.windows.net"
   admin_login     = "flsadmin"
   admin_password  = "sql!Flsmidth,2020"
