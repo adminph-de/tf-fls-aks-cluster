@@ -54,3 +54,13 @@ module "node_pool" {
   aks_cluster_id = module.cluster.id
   node_subnet_id = module.network.subnet_ids[0]
 }
+## Create SQL Server (Paas)
+module "sql_server" {
+  source          = "git@github.com:adminph-de/tf-fls-aks-cluster.git//modules//sql_server?ref=cluster-1.0"
+  name            = "shared-sql01-p"
+  resource_group_name  = azurerm_resource_group.aks.name
+  region          = "westeurope"
+  version         = "12.0"
+  admin_login     = "flsadmin"
+  admin__password = "sql!Flsmidth,2020"
+}
