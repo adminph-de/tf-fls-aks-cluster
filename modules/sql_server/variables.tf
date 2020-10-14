@@ -19,11 +19,6 @@ variable "sku" {
   default     = "12.0"
 }
 
-variable "url" {
-  type        = string
-  description = "SQL Server URL <name>.database.windows.net"
-}
-
 variable "admin_login" {
   type        = string
   description = "SQL Server Administratior Username"
