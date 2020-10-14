@@ -16,5 +16,5 @@ module "sql_server" {
   region          = "westeurope"
   #version         = "2.0"
   admin_login     = "flsadmin"
-  admin__password = "sql!Flsmidth,2020"
+  admin_password  = "sql!Flsmidth,2020"
 }

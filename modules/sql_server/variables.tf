@@ -1,7 +1,6 @@
 variable "server_name" {
   type        = string
   description = "Name of the SQL Server"
-  default     = 1
 }
 
 variable "resource_group_name" {
