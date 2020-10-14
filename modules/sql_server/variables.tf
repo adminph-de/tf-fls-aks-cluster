@@ -14,6 +14,7 @@ variable "region" {
 }
 
 variable "version" {
+  type        = string
   description = "SQL Server version"
   default     = "12.0"
 }
