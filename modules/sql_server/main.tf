@@ -5,10 +5,10 @@ resource "azurerm_sql_server" "sql_server" {
       node_count
     ]
   }
-  name                         = var.server_name
+  name                         = var.name
   resource_group_name          = var.resource_group_name
   location                     = var.region
-  #version                      = var.version
+  #version                     = var.version
   administrator_login          = var.admin_login
   administrator_login_password = var.admin_password
 }

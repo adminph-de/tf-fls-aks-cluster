@@ -1,4 +1,4 @@
-variable "server_name" {
+variable "name" {
   type        = string
   description = "Name of the SQL Server"
 }
