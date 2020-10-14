@@ -14,7 +14,7 @@ module "sql_server" {
   name            = "shared-sql01-p"
   resource_group_name = azurerm_resource_group.sql.name
   region          = "westeurope"
-  #version        = "2.0"
+  #version        = "12.0"
   admin_login     = "flsadmin"
   admin_password  = "sql!Flsmidth,2020"
 }
