@@ -37,8 +37,7 @@ resource "azurerm_virtual_network" "network" {
   dynamic "service_endpoints" {
     for_each = var.enable_service_endpoints ? [1] : []
     content {
-      enable = var.enable_service_endpoints
-      id = var.service_endpoints_id
+      service_endpoints = var.service_endpoints_id
     }
   }
 
