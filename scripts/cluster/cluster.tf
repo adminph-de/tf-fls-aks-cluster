@@ -32,7 +32,7 @@ module "network" {
     name       = "aks-default-1-p"
     cidr_block = 23
     enable_service_endpoints = true
-    sservice_endpoints       = ["Microsoft.Sql"]
+    service_endpoints_id     = ["Microsoft.Sql"]
   }]
 }
 ## Create the AKS cluster

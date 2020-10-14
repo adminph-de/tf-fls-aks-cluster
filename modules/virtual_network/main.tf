@@ -27,7 +27,6 @@ resource "azurerm_virtual_network" "network" {
       address_prefix = subnet.value
     }
   }
-
   dynamic "ddos_protection_plan" {
     for_each = var.enable_ddos_protection_plan ? [1] : []
     content {
@@ -35,9 +34,8 @@ resource "azurerm_virtual_network" "network" {
       id = var.ddos_protection_plan_id
     }
   }
-
-    dynamic "service_endpoints" {
-    for_each = var.service_endpoints ? [1] : []
+  dynamic "service_endpoints" {
+    for_each = var.enable_service_endpoints ? [1] : []
     content {
       enable = var.enable_service_endpoints
       id = var.service_endpoints_id
